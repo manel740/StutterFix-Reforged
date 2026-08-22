@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "net.wisecase2.stutterfix.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "stutterfix.refmap.json",
+	"plugin": "net.wisecase2.stutterfix.mixin.StutterFixMixinPlugin",
+	"mixins": [
+		"client.MinecraftClientMixin",
+		"client.RemoveYieldMixin",
+		"server.MinecraftServerMixin",
+		"gui.OptionsScreenMixin",
+		"util.utilMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

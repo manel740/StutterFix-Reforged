@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/wisecase2/StutterFix"
+
+[[mods]]
+modId="stutterfix"
+version="${version}"
+displayName="StutterFix"
+description='''This mod limits the number of threads available for chunk generation in order to reduce stuttering.'''
+authors="Wisecase2"
+logoFile="assets/stutterfix/icon.png"
+
+[[dependencies.stutterfix]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.stutterfix]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
