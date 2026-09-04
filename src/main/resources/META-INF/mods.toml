@@ -1,14 +1,18 @@
 modLoader="javafml"
 loaderVersion="[47,)"
 license="MIT"
-issueTrackerURL="https://github.com/wisecase2/StutterFix"
+issueTrackerURL="https://github.com/manel740/StutterFix-Reforged/issues"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/stutterfix-reforged"
 
 [[mods]]
 modId="stutterfix"
 version="${version}"
-displayName="StutterFix"
-description='''This mod limits the number of threads available for chunk generation in order to reduce stuttering.'''
-authors="Wisecase2"
+displayName="StutterFix Reforged"
+description='''
+StutterFix optimizes Minecraft's thread management to reduce stuttering and improve performance.
+This mod adjusts the number of worker threads and their priorities to minimize frame drops during chunk generation and world loading.
+'''
+authors="Manel740"
 logoFile="assets/stutterfix/icon.png"
 
 [[dependencies.stutterfix]]

@@ -47,15 +47,19 @@ public class ThreadConfig {
         this.serverThreadPriority = Mth.clamp(this.serverThreadPriority, 1, 10);
     }
 
-    public static ThreadConfig readConfig(String name){
+    public static ThreadConfig readConfig(String name) {
         Path path = FMLPaths.CONFIGDIR.get().resolve(name);
-
         ThreadConfig config;
         if (Files.exists(path)) {
             try (FileReader reader = new FileReader(path.toFile())) {
                 config = GSON.fromJson(reader, ThreadConfig.class);
-            } catch (IOException e) {
-                throw new RuntimeException("Could not parse config", e);
+                if (config == null) {
+                    StutterFix.LOGGER.warn("StutterFix config was empty or corrupt, resetting to defaults.");
+                    config = new ThreadConfig();
+                }
+            } catch (Exception e) {
+                StutterFix.LOGGER.warn("Could not parse stutterfix config, falling back to defaults.", e);
+                config = new ThreadConfig();
             }
         } else {
             config = new ThreadConfig();

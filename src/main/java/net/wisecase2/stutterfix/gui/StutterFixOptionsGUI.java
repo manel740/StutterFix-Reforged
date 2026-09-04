@@ -1,5 +1,6 @@
 package net.wisecase2.stutterfix.gui;
 
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.Screen;
@@ -9,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.wisecase2.stutterfix.StutterFix;
 
 public class StutterFixOptionsGUI extends Screen {
+
     private final Screen lastScreen;
     private final Options options;
     private OptionsList list;
@@ -24,6 +26,7 @@ public class StutterFixOptionsGUI extends Screen {
         this.list = new OptionsList(this.minecraft, this.width, this.height, 32, this.height - 32, 25);
         this.addOptions();
         this.addRenderableWidget(this.list);
+
         this.addRenderableWidget(Button.builder(Component.translatable("gui.done"), (button) -> {
             this.minecraft.setScreen(this.lastScreen);
         }).bounds(this.width / 2 - 100, this.height - 27, 200, 20).build());
@@ -31,10 +34,8 @@ public class StutterFixOptionsGUI extends Screen {
 
     private void addOptions() {
         int max_threads_count = Runtime.getRuntime().availableProcessors();
-
         int default_vanilla = StutterFix.getDefaultVanillaMainWorkerExecutorCount();
         int default_stutterfix = StutterFix.getDefaultStutterFixMainWorkerExecutorCount();
-
         int defaultRenderThreadPriority = (max_threads_count > 4) ? 10 : 5;
         int defaultServerThreadPriority = (max_threads_count > 4) ? 8 : 5;
 
@@ -127,8 +128,18 @@ public class StutterFixOptionsGUI extends Screen {
     }
 
     @Override
-    public void onClose() {
+    public void removed() {
         StutterFix.saveThread.execute(() -> StutterFix.threadconfig.saveConfig());
-        this.minecraft.setScreen(this.lastScreen);
+        super.removed();
+    }
+
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+        guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, 8, 0xFFFFFF);
+
+        guiGraphics.drawCenteredString(this.font, Component.literal("by Manel740"), this.width / 2, 20, 0x808080);
     }
 }
